@@ -136,3 +136,13 @@ async def find_nearest(
             os.remove(tmp_out_path)
         print('Before returning StreamingResponse')
         return StreamingResponse(iterfile(), media_type='text/plain', headers={'Content-Disposition': f'attachment; filename=nearest_genes.txt'})
+
+@app.get("/")
+def read_root():
+    return {
+        "message": "Bio API is live. Use the /nearest endpoint to upload BED files."
+    }
+
+@app.get("/health")
+def health_check():
+    return {"status": "ok"}
